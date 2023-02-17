@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
+    <h1>Todo App</h1>
+    <form action="/" method="post" class="form">
+      <input type="text" name="add" placeholder="What will you do?" />
+      <input type="submit" value="add" class="add" />
+    </form>
+
+    <h2>Todo</h2>
+    <ul>
+      <% for(let todo of todos){ %>
+        <% if (todo.done === 0) { %>
+          <li>
+            <span><%= todo.name %></span>
+            <div class="button">
+              <form action="/done" method="post">
+                <input type="hidden" name="id" value="<%= todo.id %>"/>
+                <input type="submit" class="button2" value="✔︎"/>
+              </form>
+              <form action="/delete" method="post">
+                <input type="hidden" name="id" value="<%= todo.id %>"/>
+                <input type="submit" class="button2" value="x">
+              </form>
+            </div>
+          </li>
+        <% } %>
+      <% } %>
+    </ul>
+
+    <h2>Complete</h2>
+    <ul>
+      <% for(let todo of todos){ %>
+        <% if (todo.done === 1) { %>
+          <li>
+            <span><%= todo.name %></span>
+            <div class="button">
+              <form action="/delete" method="post">
+                <input type="hidden" name="id" value="<%= todo.id %>"/>
+                <input type="submit" class="button2" value="x">
+              </form>
+            </div>
+          </li>
+        <% } %>
+      <% } %>
+    </ul>
+  </body>
+</html>
